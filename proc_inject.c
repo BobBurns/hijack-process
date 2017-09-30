@@ -1,3 +1,13 @@
+/* Program to infect running process
+ * while bypassing pax restrictions
+ * modified code from Elfmaster
+ *
+ * https://github.com/elfmaster/packt_book/blob/master/code_inject.c
+ * http://vxer.org/lib/vrn00.html
+ *
+ * Buy his book! 
+ * Learning Linux Binary Analysis PACKT publishing
+ */
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

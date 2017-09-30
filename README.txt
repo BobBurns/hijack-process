@@ -1,3 +1,17 @@
+Program to inject code into running process.
+From Learning Linux Binary Analysis Chapter 3 by Ryan "Elfmaster" O'Neill
+
+Usage:
+./helloop
+sudo ./proc_inject `pidof helloop` payload
+
+Resourses:
+https://github.com/elfmaster/packt_book/blob/master/code_inject.c
+http://vxer.org/lib/vrn00.html
+
+
+Output:
+
 bob@ops-Latitude-E6420 ~/Pen/elfing/trace $ sudo ./proc_inject `pidof helloop` payload
 [sudo] password for bob: 
 read: 600e28
