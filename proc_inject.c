@@ -333,9 +333,9 @@ int main(int argc, char **argv)
 	for (i = 0; i < 40; i++)
 	{
 		//printf("read addr:%lx %.2x\n ", &tmp[i], tmp[i]);
-		printf("%.2x ", tmp[i]);
 		if (i % 20 == 0)
 			printf("\n");
+		printf("%.2x ", tmp[i]);
 		if (tmp[i] == 0x0f && tmp[i + 1] == 0x05)
 		{
 			sysenter = syscall_rip + i;
