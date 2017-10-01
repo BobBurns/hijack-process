@@ -113,7 +113,7 @@ int pid_read(int pid, void *dst, const void *src, size_t len)
 	while (sz-- != 0)
 	{
 		word = ptrace(PTRACE_PEEKTEXT, pid, s, NULL);
-		printf("read: %lx\n", word);
+		printf("read: 0x%016lx\n", word);
 		if (word == -1 && errno)
 		{
 			fprintf(stderr, "pid_read failed, pid: %d: %s\n", pid, strerror(errno));
@@ -235,7 +235,6 @@ int two_step(handle_t *h)
 	printf("rip: %llx\n", h->pt_reg.rip);
 	printf("r8: %llx\n", h->pt_reg.r8);
 	printf("rax: %llx\n", h->pt_reg.rax);
-	printf("two_step success!\n");
 	return 0;
 	
 }
@@ -342,7 +341,7 @@ int main(int argc, char **argv)
 		}
 	}
 	printf("\n");
-	printf("got sysenter %lx\n", syscall_rip+i);
+	printf("sysenter: %lx\n", syscall_rip+i);
 	if (sysenter == 0)
 	{
 		printf("could not find sysenter\n");
@@ -386,6 +385,8 @@ int main(int argc, char **argv)
 	int evil_obj_fd = h.pt_reg.rax;
 
 	/* write back original data segment */
+	printf("writing back original data segment.\n");
+
 	result = pid_write(h.pid, (uint64_t *)h.data_base, origcode, sizeof(void *) * 3);
 	if (result < 0)
 		exit(-1);
