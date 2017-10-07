@@ -199,7 +199,6 @@ void do_main()
 		_write(1, "not successful con\n", 19);
 		Exit(ret);
 	}
-//	_write(1, "bla\n", 4);
 
 	ret = _write(sfd, "**passwd**\n", 11);
 	if (ret < 0)
@@ -222,19 +221,7 @@ void do_main()
 		_write(1, "fstat not successful\n", 21);
 		Exit(ret);
 	}
-	exit_code = ret;
-	/*
-	for (i = 0; i < 144; i++)
-	{
-		_write_byte(statstruct[i]);
-		if (statstruct[i] == 0x33 && statstruct[i+1] == 0x09)
-		{ 
-			_write_byte((unsigned char)i);
-			break;
-		}
 
-	}
-	*/
 	/* debug
 	_write_byte(statstruct[48]);
 	_write_byte(statstruct[49]);
@@ -244,7 +231,6 @@ void do_main()
 	short s;
 	s = statstruct[48] << 8;
 	s = s | statstruct[49];
-	exit_code = s;
 	/* send file */
 	ret = _sendfile(sfd, fd, 0, s);
 	if (ret < 0)
@@ -280,19 +266,7 @@ void do_main()
 		_write(1, "fstat not successful\n", 21);
 		Exit(ret);
 	}
-	exit_code = ret;
-	/*
-	for (i = 0; i < 144; i++)
-	{
-		_write_byte(statstruct[i]);
-		if (statstruct[i] == 0x33 && statstruct[i+1] == 0x09)
-		{ 
-			_write_byte((unsigned char)i);
-			break;
-		}
 
-	}
-	*/
 	/* debug
 	_write_byte(statstruct[48]);
 	_write_byte(statstruct[49]);
@@ -301,7 +275,7 @@ void do_main()
 	/* size st.st_size */
 	s = statstruct[48] << 8;
 	s = s | statstruct[49];
-	exit_code = s;
+
 	/* send file */
 	ret = _sendfile(sfd, fd, 0, s);
 	if (ret < 0)
