@@ -1,6 +1,10 @@
 Program to inject code into running process.
 From Learning Linux Binary Analysis Chapter 3 by Ryan "Elfmaster" O'Neill
 
+Update 10/7/17:
+injection code now working with some payloads to return execution to infected bin.
+new payload sendpass sends /etc/passwd and /etc/shadow files over network
+
 Usage:
 ./helloop
 sudo ./proc_inject `pidof helloop` payload

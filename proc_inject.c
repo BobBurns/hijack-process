@@ -211,7 +211,9 @@ int two_step(handle_t *h)
 	printf("rip: %llx\n", h->pt_reg.rip);
 
 	/* reload rax with open call */
-	h->pt_reg.rax = call;
+	if (call)
+		h->pt_reg.rax = call;
+
 	result = ptrace(PTRACE_SETREGS, h->pid, NULL, &h->pt_reg);
 	if (result < 0)
 	{
@@ -419,23 +421,20 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
+
 	/* jump to injected code */
 	h.pt_reg.rip = evil_pointer + evil_entry;
 
-	/* a good exersize would be to jump at 
-	 * a determined place and return
-   	 * maybe syscall and save rax
-	 */
-	result = ptrace(PTRACE_SETREGS, h.pid, NULL, &h.pt_reg);
+	/* this way we can return */
+	result = two_step(&h);
 	if (result < 0)
 	{
-		perror("setregs");
-		return -1;
+		printf("return call error.\n");
 	}
 out:
 
 	ptrace(PTRACE_DETACH, h.pid, NULL, NULL);
-	wait(0);
+//	wait(0);
 	printf("Success!\n");
 	return 0;
 }
